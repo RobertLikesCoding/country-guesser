@@ -1,0 +1,41 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-area {
+  border: 2px solid black;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#flag {
+  font-size: 3rem;
+}
+
+#solution {
+  margin-top: 1rem;
+  border-bottom: 1px solid black;
+}
+
+#reveal-btn {
+  background-color: cornsilk;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  width: 100%;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
