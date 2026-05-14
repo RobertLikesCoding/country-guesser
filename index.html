@@ -15,11 +15,15 @@
       <section class="game-area">
         <div id="flag" class="flex-center"></div>
         <h1 style="font-size: 1.5rem">Guess the country</h1>
-        <button id="reveal-btn" class="btn">Reveal solution</button>
-        <button id="restart-btn" class="btn" hidden>🗘 Restart</button>
+        <div style="display: flex">
+          <button id="solution-btn" class="btn">Reveal solution</button>
+          <button id="restart-btn" class="btn" hidden>🗘 Restart</button>
+          <button id="hint-btn" class="btn">?</button>
+        </div>
         <div class="solution-underline">
           <span id="solution"></span>
         </div>
+        <span id="hint"></span>
       </section>
     </main>
     <script type="module" src="./script.js"></script>

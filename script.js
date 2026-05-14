@@ -1,27 +1,21 @@
 import { countryFlags } from "./countries.js";
 
-// const countriesEurope = countryFlags.europe;
-// const countriesAmerica = countryFlags.americas;
-// const countriesAsia = countryFlags.asia;
-// const countriesAfrica = countryFlags.africa;
-// const countriesOceana = countryFlags.oceania;
-// const countryCount =
-//   countriesAfrica.length +
-//   countriesAmerica.length +
-//   countriesAsia.length +
-//   countriesEurope.length +
-//   countriesOceana.length;
-
 let randomCountry;
+let continentForCountry;
 const flagElement = document.getElementById("flag");
-const revealButton = document.getElementById("reveal-btn");
+const revealButton = document.getElementById("solution-btn");
 const restartButton = document.getElementById("restart-btn");
+const hintButton = document.getElementById("hint-btn");
 const solutionText = document.getElementById("solution");
+const hint = document.getElementById("hint");
 revealButton.addEventListener("click", () => {
   revealSolution();
 });
 restartButton.addEventListener("click", () => {
   startNewRound();
+});
+hintButton.addEventListener("click", () => {
+  revealHint();
 });
 
 function getRandomInt(max) {
@@ -29,10 +23,9 @@ function getRandomInt(max) {
 }
 
 function setRandomCountry() {
-  const randomContinent = Object.keys(countryFlags)[getRandomInt(5)];
-
+  continentForCountry = Object.keys(countryFlags)[getRandomInt(5)];
   randomCountry =
-    countryFlags[randomContinent][getRandomInt(randomContinent.length)];
+    countryFlags[continentForCountry][getRandomInt(continentForCountry.length)];
 }
 
 setRandomCountry();
@@ -46,6 +39,10 @@ function revealSolution() {
   restartButton.hidden = false;
 }
 
+function revealHint() {
+  hint.textContent = continentForCountry;
+}
+
 function startNewRound() {
   setRandomCountry();
 
@@ -53,6 +50,7 @@ function startNewRound() {
   solutionText.textContent = "";
   flagElement.classList.add("fade-in");
   flagElement.textContent = randomCountry.flag;
+  hint.textContent = "";
   revealButton.hidden = false;
   restartButton.hidden = true;
 }

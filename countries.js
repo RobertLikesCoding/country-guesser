@@ -49,7 +49,7 @@ export const countryFlags = {
     { name: "Ukraine", flag: "🇺🇦" },
     { name: "Holy See", flag: "🇻🇦" },
   ],
-  americas: [
+  america: [
     { name: "United States", flag: "🇺🇸" },
     { name: "Canada", flag: "🇨🇦" },
     { name: "Mexico", flag: "🇲🇽" },
