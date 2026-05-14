@@ -4,16 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flag Guesser</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <main>
       <section class="game-area">
-        <p>Guess the country</p>
-        <div id="flag" class="flex-center">🇩🇪</div>
-        <button id="reveal-btn">Reveal solution</button>
-        <p id="solution"></p>
+        <h1 style="font-size: 1.25rem">Guess the country</h1>
+        <div id="flag" class="flex-center"></div>
+        <button id="reveal-btn" class="btn">Reveal solution</button>
+        <button id="restart-btn" class="btn" hidden>Restart</button>
+        <span id="solution"></span>
       </section>
     </main>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

@@ -1,3 +1,7 @@
+html {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
 body {
   box-sizing: border-box;
   margin: 0;
@@ -7,31 +11,59 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: antiquewhite;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: 1rem;
 }
 
 .game-area {
+  background-color: rgb(254, 255, 239);
   border: 2px solid black;
   border-radius: 0.5rem;
   padding: 2rem;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   gap: 2rem;
+  box-shadow: 4px 6px rgb(225, 203, 173);
 }
 
 #flag {
   font-size: 3rem;
+  height: 3rem;
 }
 
 #solution {
   margin-top: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px dashed black;
+  text-align: center;
+  min-height: 1.5rem;
+  display: block;
 }
 
 #reveal-btn {
   background-color: cornsilk;
+}
+#restart-btn {
+  background-color: rgb(187, 234, 200);
+}
+
+.btn {
   border-radius: 0.5rem;
   padding: 0.25rem 0.75rem;
   width: 100%;
+  border: 2px solid rgb(236, 218, 145);
+  box-shadow: 3px 4px 0 gray;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 .flex-center {
