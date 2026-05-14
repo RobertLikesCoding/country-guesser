@@ -1,45 +1,42 @@
 import { countryFlags } from "./countries.js";
 
-const countriesEurope = countryFlags.europe;
-const countriesAmerica = countryFlags.americas;
-const countriesAsia = countryFlags.asia;
-const countriesAfrica = countryFlags.africa;
-const countriesOceana = countryFlags.oceania;
-const countryCount =
-  countriesAfrica.length +
-  countriesAmerica.length +
-  countriesAsia.length +
-  countriesEurope.length +
-  countriesOceana.length;
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
+// const countriesEurope = countryFlags.europe;
+// const countriesAmerica = countryFlags.americas;
+// const countriesAsia = countryFlags.asia;
+// const countriesAfrica = countryFlags.africa;
+// const countriesOceana = countryFlags.oceania;
+// const countryCount =
+//   countriesAfrica.length +
+//   countriesAmerica.length +
+//   countriesAsia.length +
+//   countriesEurope.length +
+//   countriesOceana.length;
 
 let randomCountry;
 const flagElement = document.getElementById("flag");
 const revealButton = document.getElementById("reveal-btn");
 const restartButton = document.getElementById("restart-btn");
+const solutionText = document.getElementById("solution");
 revealButton.addEventListener("click", () => {
   revealSolution();
 });
 restartButton.addEventListener("click", () => {
   startNewRound();
 });
-const solutionText = document.getElementById("solution");
 
-function getRandomCountry() {
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+function setRandomCountry() {
   const randomContinent = Object.keys(countryFlags)[getRandomInt(5)];
-  console.log("continent", randomContinent);
 
   randomCountry =
     countryFlags[randomContinent][getRandomInt(randomContinent.length)];
-  console.log(randomCountry);
 }
 
-getRandomCountry();
+setRandomCountry();
 flagElement.textContent = randomCountry.flag;
-console.log(randomCountry);
 
 function revealSolution() {
   solutionText.classList.add("fade-in");
@@ -50,7 +47,7 @@ function revealSolution() {
 }
 
 function startNewRound() {
-  getRandomCountry();
+  setRandomCountry();
 
   solutionText.classList.remove("fade-in");
   solutionText.textContent = "";
