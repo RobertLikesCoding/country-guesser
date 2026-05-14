@@ -1,5 +1,27 @@
-html {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+:root {
+  --clr-primary: #212cff;
+  --clr-secondary: #fff5e0;
+  --clr-tertiary: #212cff0d;
+  --clr-hover: #000ac0;
+  --bs-body-color: #212cff !important;
+  --main-font: "Roboto", sans-serif !important;
+  --nav-height: 78px;
+  --hard-shadow: 8px 8px 0 0 var(--clr-primary);
+  --icon-color: var(--clr-primary);
+  --shadow-clr: rgba(47, 47, 47, 0.2);
+
+  --clr-primary-300: color-mix(in srgb, var(--clr-primary) 40%, white);
+  --clr-primary-400: color-mix(in srgb, var(--clr-primary) 55%, white);
+  --clr-primary-500: color-mix(in srgb, var(--clr-primary) 70%, white);
+  --clr-primary-600: color-mix(in srgb, var(--clr-primary) 85%, white);
+  --clr-primary-700: var(--clr-primary);
+  --clr-primary-800: color-mix(in srgb, var(--clr-primary) 85%, black);
+  --clr-primary-900: color-mix(in srgb, var(--clr-primary) 60%, black);
+}
+
+html * {
+  font-family: var(--main-font);
+  color: var(--clr-primary);
 }
 
 body {
@@ -11,7 +33,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
+  background-color: var(--clr-secondary);
 }
 
 h1,
@@ -25,15 +47,15 @@ h6 {
 }
 
 .game-area {
-  background-color: rgb(254, 255, 239);
-  border: 2px solid black;
+  background-color: white;
+  border: 2px solid var(--clr-primary);
   border-radius: 0.5rem;
   padding: 2rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
-  box-shadow: 4px 6px rgb(225, 203, 173);
+  box-shadow: 8px 8px 0 0 var(--clr-primary);
 }
 
 #flag {
@@ -43,27 +65,47 @@ h6 {
 
 #solution {
   margin-top: 1rem;
-  border-bottom: 1px dashed black;
   text-align: center;
   min-height: 1.5rem;
   display: block;
 }
 
-#reveal-btn {
-  background-color: cornsilk;
+.solution-underline {
+  border-bottom: 2px dashed var(--clr-primary);
 }
-#restart-btn {
-  background-color: rgb(187, 234, 200);
+
+.fade-in {
+  animation: fadeIn forwards 1s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .btn {
+  background-color: var(--clr-primary);
+  color: white;
   border-radius: 0.5rem;
   padding: 0.25rem 0.75rem;
   width: 100%;
-  border: 2px solid rgb(236, 218, 145);
-  box-shadow: 3px 4px 0 gray;
+  height: 2.25rem;
+  border: 2px solid var(--clr-primary);
+  box-shadow: 3px 4px var(--shadow-clr);
   font-weight: 600;
   font-size: 1rem;
+  cursor: pointer;
+  transition: all 200ms;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: var(--clr-primary-800);
+  border-color: var(--clr-hover);
 }
 
 .flex-center {

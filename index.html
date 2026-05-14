@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flag Guesser</title>
     <link rel="stylesheet" href="./style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <main>
       <section class="game-area">
-        <h1 style="font-size: 1.25rem">Guess the country</h1>
         <div id="flag" class="flex-center"></div>
+        <h1 style="font-size: 1.5rem">Guess the country</h1>
         <button id="reveal-btn" class="btn">Reveal solution</button>
-        <button id="restart-btn" class="btn" hidden>Restart</button>
-        <span id="solution"></span>
+        <button id="restart-btn" class="btn" hidden>🗘 Restart</button>
+        <div class="solution-underline">
+          <span id="solution"></span>
+        </div>
       </section>
     </main>
     <script type="module" src="./script.js"></script>

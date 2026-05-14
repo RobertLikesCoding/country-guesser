@@ -42,6 +42,8 @@ flagElement.textContent = randomCountry.flag;
 console.log(randomCountry);
 
 function revealSolution() {
+  solutionText.classList.add("fade-in");
+  flagElement.classList.remove("fade-in");
   solutionText.textContent = randomCountry.name;
   revealButton.hidden = true;
   restartButton.hidden = false;
@@ -49,9 +51,10 @@ function revealSolution() {
 
 function startNewRound() {
   getRandomCountry();
-  console.log("random new", randomCountry);
 
+  solutionText.classList.remove("fade-in");
   solutionText.textContent = "";
+  flagElement.classList.add("fade-in");
   flagElement.textContent = randomCountry.flag;
   revealButton.hidden = false;
   restartButton.hidden = true;
