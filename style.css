@@ -56,6 +56,9 @@ h6 {
   flex-direction: column;
   gap: 2rem;
   box-shadow: 8px 8px 0 0 var(--clr-primary);
+  width: 250px;
+  height: 500px;
+  text-align: center;
 }
 
 #flag {
@@ -66,7 +69,6 @@ h6 {
 #solution {
   font-size: 1.25rem;
   margin-top: 1rem;
-  text-align: center;
   min-height: 1.5rem;
   display: block;
 }
@@ -107,6 +109,19 @@ h6 {
 .btn:active {
   background-color: var(--clr-primary-800);
   border-color: var(--clr-hover);
+}
+
+#hint-btn {
+  width: 2.25rem;
+}
+
+#hint {
+  height: 1rem;
+}
+
+.disabled {
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 .flex-center {

@@ -37,10 +37,17 @@ function revealSolution() {
   solutionText.textContent = randomCountry.name;
   revealButton.hidden = true;
   restartButton.hidden = false;
+  hintButton.setAttribute("disabled", true);
+  hintButton.classList.add("disabled");
 }
 
 function revealHint() {
-  hint.textContent = continentForCountry;
+  if (hint.textContent.includes("continent")) {
+    const startLetters = randomCountry.name.substring(0, 2);
+    solutionText.textContent = `${startLetters}...`;
+  } else {
+    hint.textContent = `continent: ${continentForCountry}`;
+  }
 }
 
 function startNewRound() {
@@ -53,4 +60,6 @@ function startNewRound() {
   hint.textContent = "";
   revealButton.hidden = false;
   restartButton.hidden = true;
+  hintButton.removeAttribute("disabled");
+  hintButton.classList.remove("disabled");
 }

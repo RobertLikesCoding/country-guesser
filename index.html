@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flag Guesser</title>
+    <title>Country Guesser</title>
     <link rel="stylesheet" href="./style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
@@ -13,16 +13,19 @@
   <body>
     <main>
       <section class="game-area">
-        <div id="flag" class="flex-center"></div>
+        <span id="flag" class="flex-center"></span>
         <h1 style="font-size: 1.5rem">Guess the country</h1>
-        <div style="display: flex">
+
+        <div style="display: flex; gap: 0.5rem">
           <button id="solution-btn" class="btn">Reveal solution</button>
-          <button id="restart-btn" class="btn" hidden>🗘 Restart</button>
-          <button id="hint-btn" class="btn">?</button>
+          <button id="restart-btn" class="btn" hidden>Next country!</button>
+          <button id="hint-btn" class="btn" title="Click for hint">?</button>
         </div>
+
         <div class="solution-underline">
           <span id="solution"></span>
         </div>
+
         <span id="hint"></span>
       </section>
     </main>
