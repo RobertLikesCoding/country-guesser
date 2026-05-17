@@ -46,6 +46,21 @@ p {
   margin: 0;
 }
 
+#score-section {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  animation: fadeIn forwards 1s;
+}
+
+.rules {
+  margin: 0;
+  li {
+    padding: 0.25rem 0;
+  }
+}
+
 .game-area {
   background-color: white;
   border: 2px solid var(--clr-primary);
@@ -60,13 +75,6 @@ p {
   height: 500px;
   text-align: center;
   animation: fadeIn forwards 1s;
-}
-
-.rules {
-  margin: 0;
-  li {
-    padding: 0.25rem 0;
-  }
 }
 
 #flag {
