@@ -1,4 +1,7 @@
 import { countryFlags } from "./countries.js";
+import { startGame } from "./gameLogic.js";
+
+startGame();
 
 let randomCountry;
 let continentForCountry;
