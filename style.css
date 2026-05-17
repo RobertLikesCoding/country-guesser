@@ -41,9 +41,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin: 0;
-  font-size: 1rem;
 }
 
 .game-area {
@@ -59,6 +59,14 @@ h6 {
   width: 250px;
   height: 500px;
   text-align: center;
+  animation: fadeIn forwards 1s;
+}
+
+.rules {
+  margin: 0;
+  li {
+    padding: 0.25rem 0;
+  }
 }
 
 #flag {
@@ -87,6 +95,7 @@ h6 {
   }
   to {
     opacity: 1;
+    left: 500px;
   }
 }
 
@@ -124,8 +133,16 @@ h6 {
   pointer-events: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.text-align-left {
+  text-align: left;
 }

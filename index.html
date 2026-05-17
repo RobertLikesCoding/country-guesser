@@ -12,7 +12,20 @@
   </head>
   <body>
     <main>
-      <section class="game-area">
+      <section id="start-screen" class="game-area text-align-left">
+        <h1>Welcome to Country Guesser</h1>
+        <p>Here's how it works:</p>
+        <ul class="rules">
+          <li>There are 195 flags</li>
+          <li>You get points for each correctly guessed flag</li>
+          <li>
+            If you make more than 3 mistakes total: <br /><br />
+            You have to start over!
+          </li>
+        </ul>
+        <button class="btn" id="start-btn">Start guessing</button>
+      </section>
+      <section id="game-screen" class="game-area hidden">
         <span id="flag" class="flex-center"></span>
         <h1 style="font-size: 1.5rem">Guess the country</h1>
 
@@ -29,6 +42,6 @@
         <span id="hint"></span>
       </section>
     </main>
-    <script type="module" src="./script.js"></script>
+    <script type="module" src="./js/script.js"></script>
   </body>
 </html>
