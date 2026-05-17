@@ -58,7 +58,6 @@ function startNewRound() {
 
   solutionText.classList.remove("fade-in");
   solutionText.textContent = "";
-  flagElement.classList.add("fade-in");
   flagElement.textContent = randomCountry.flag;
   hint.textContent = "";
   revealButton.hidden = false;

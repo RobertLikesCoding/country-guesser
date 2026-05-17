@@ -12,6 +12,11 @@
   </head>
   <body>
     <main>
+      <section id="score-section" class="hidden">
+        <p>Score:</p>
+        <p id="score"></p>
+      </section>
+
       <section id="start-screen" class="game-area text-align-left">
         <h1>Welcome to Country Guesser</h1>
         <p>Here's how it works:</p>
@@ -25,8 +30,9 @@
         </ul>
         <button class="btn" id="start-btn">Start guessing</button>
       </section>
+
       <section id="game-screen" class="game-area hidden">
-        <span id="flag" class="flex-center"></span>
+        <span id="flag" class="flex-center fade-in"></span>
         <h1 style="font-size: 1.5rem">Guess the country</h1>
 
         <div style="display: flex; gap: 0.5rem">
