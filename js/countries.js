@@ -1,4 +1,4 @@
-export const countryFlags = {
+export const countriesList = {
   europe: [
     { name: "Germany", flag: "🇩🇪" },
     { name: "France", flag: "🇫🇷" },

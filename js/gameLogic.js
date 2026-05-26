@@ -1,3 +1,5 @@
+import { countriesList } from "./countries.js";
+
 const scoreDisplay = document.getElementById("score");
 const flagElement = document.getElementById("flag");
 const revealButton = document.getElementById("solution-btn");
@@ -36,16 +38,20 @@ export function initializeRound() {
     return Math.floor(Math.random() * max);
   }
 
-  function setRandomCountry() {
-    continentForCountry = Object.keys(countryFlags)[getRandomInt(5)];
-    randomCountry =
-      countryFlags[continentForCountry][
-        getRandomInt(continentForCountry.length)
-      ];
+  function getCountryOptions() {
+    // create an array of 3 countries, can be different continents
+    // can't be the same twice!
+    // one needs to be the correct one and two false ones
+    // BETTER: just get three random countries and then pick a random one from those, that will be the correct one
+    const countries = [];
+    for (let step = 0; step < 3; step++) {
+      const continent = Object.keys(countriesList)[getRandomInt(5)];
+      const randomCountry =
+        countriesList[continent][getRandomInt(continent.length)];
+      countries.push(randomCountry);
+    }
+    return countries;
   }
-
-  setRandomCountry();
-  flagElement.textContent = randomCountry.flag;
 
   function revealSolution() {
     flagElement.classList.remove("fade-in");
@@ -64,6 +70,13 @@ export function initializeRound() {
       hint.textContent = `continent: ${continentForCountry}`;
     }
   }
+
+  return {
+    getRandomInt,
+    getCountryOptions,
+    revealSolution,
+    revealHint,
+  };
 }
 
 function startNewRound() {

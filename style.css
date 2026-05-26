@@ -89,6 +89,12 @@ p {
   display: block;
 }
 
+#solution-btn {
+  btn:focus {
+    background-color: green;
+  }
+}
+
 .solution-underline {
   border-bottom: 2px dashed var(--clr-primary);
 }
