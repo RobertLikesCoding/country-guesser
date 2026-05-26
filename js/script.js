@@ -6,15 +6,10 @@ let randomCountry;
 let continentForCountry;
 let countryToGuessIndex;
 const flagElement = document.getElementById("flag");
-const revealButton = document.getElementById("solution-btn");
 const restartButton = document.getElementById("restart-btn");
 const hintButton = document.getElementById("hint-btn");
-const solutionText = document.getElementById("solution");
 const hint = document.getElementById("hint");
 const countryChoices = document.getElementById("country-choices");
-revealButton.addEventListener("click", () => {
-  revealSolution();
-});
 restartButton.addEventListener("click", () => {
   startNewRound();
 });
@@ -23,8 +18,13 @@ hintButton.addEventListener("click", () => {
 });
 
 // cool, this is basically a vue composable!
-const { getRandomInt, getCountryOptions, revealHint, revealSolution } =
-  initializeRound();
+const {
+  getRandomInt,
+  getCountryOptions,
+  revealHint,
+  revealSolution,
+  startNewRound,
+} = initializeRound();
 
 initialization();
 
@@ -35,10 +35,6 @@ function initialization() {
   options.forEach((country, index) => {
     const button = document.createElement("button");
     button.classList.add("btn");
-    console.log(index);
-    console.log(countryToGuessIndex);
-
-    if ((index = countryToGuessIndex)) button.id = "solution-btn";
     button.textContent = country.name;
     button.addEventListener("click", (event) => {
       handleCountrySelection(event, options);
@@ -54,21 +50,12 @@ function handleCountrySelection(event, options) {
 
   if (selectedCountry === options[countryToGuessIndex].name) {
     console.log("correct!");
-    increaseScore();
+    // increaseScore();
+    // highlight correct answer
+    // disable wrong answer
   } else {
     console.log("false");
+    // start reset score to 0
+    // show restart game button
   }
-}
-
-function startNewRound() {
-  let countryToGuessIndex = getRandomInt(3);
-
-  solutionText.classList.remove("fade-in");
-  solutionText.textContent = "";
-  flagElement.textContent = randomCountry.flag;
-  hint.textContent = "";
-  revealButton.hidden = false;
-  restartButton.hidden = true;
-  hintButton.removeAttribute("disabled");
-  hintButton.classList.remove("disabled");
 }

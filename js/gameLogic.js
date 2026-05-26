@@ -2,17 +2,12 @@ import { countriesList } from "./countries.js";
 
 const scoreDisplay = document.getElementById("score");
 const flagElement = document.getElementById("flag");
-const revealButton = document.getElementById("solution-btn");
 const restartButton = document.getElementById("restart-btn");
 const hintButton = document.getElementById("hint-btn");
-const solutionText = document.getElementById("solution");
 const hint = document.getElementById("hint");
 let score = 0;
 let randomCountry;
 let continentForCountry;
-revealButton.addEventListener("click", () => {
-  revealSolution();
-});
 restartButton.addEventListener("click", () => {
   startNewRound();
 });
@@ -55,8 +50,6 @@ export function initializeRound() {
 
   function revealSolution() {
     flagElement.classList.remove("fade-in");
-    solutionText.textContent = randomCountry.name;
-    revealButton.hidden = true;
     restartButton.hidden = false;
     hintButton.setAttribute("disabled", true);
     hintButton.classList.add("disabled");
@@ -71,24 +64,22 @@ export function initializeRound() {
     }
   }
 
+  function startNewRound() {
+    setRandomCountry();
+
+    flagElement.classList.add("fade-in");
+    flagElement.textContent = randomCountry.flag;
+    hint.textContent = "";
+    restartButton.hidden = true;
+    hintButton.removeAttribute("disabled");
+    hintButton.classList.remove("disabled");
+  }
+
   return {
     getRandomInt,
     getCountryOptions,
     revealSolution,
     revealHint,
+    startNewRound,
   };
-}
-
-function startNewRound() {
-  setRandomCountry();
-
-  solutionText.classList.remove("fade-in");
-  solutionText.textContent = "";
-  flagElement.classList.add("fade-in");
-  flagElement.textContent = randomCountry.flag;
-  hint.textContent = "";
-  revealButton.hidden = false;
-  restartButton.hidden = true;
-  hintButton.removeAttribute("disabled");
-  hintButton.classList.remove("disabled");
 }

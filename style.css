@@ -82,23 +82,6 @@ p {
   height: 3rem;
 }
 
-#solution {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-  min-height: 1.5rem;
-  display: block;
-}
-
-#solution-btn {
-  btn:focus {
-    background-color: green;
-  }
-}
-
-.solution-underline {
-  border-bottom: 2px dashed var(--clr-primary);
-}
-
 .fade-in {
   animation: fadeIn forwards 1s;
 }
@@ -142,6 +125,8 @@ p {
   height: 1rem;
 }
 
+/* UTILITIES */
+
 .disabled {
   opacity: 0.3;
   pointer-events: none;
@@ -159,4 +144,10 @@ p {
 
 .text-align-left {
   text-align: left;
+}
+
+#country-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
