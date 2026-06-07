@@ -35,14 +35,15 @@
         <span id="flag" class="flex-center fade-in"></span>
         <h1 style="font-size: 1.5rem">Guess the country</h1>
 
-        <div id="country-choices"></div>
-
-        <div style="display: flex; gap: 0.5rem">
-          <button id="restart-btn" class="btn" hidden>Next country!</button>
-          <button id="hint-btn" class="btn" title="Click for hint">?</button>
+        <div id="country-choices">
+          <button class="btn option"></button>
+          <button class="btn option"></button>
+          <button class="btn option"></button>
         </div>
 
-        <span id="hint"></span>
+        <div style="display: flex; gap: 0.5rem">
+          <button id="next-round-btn" class="btn" hidden>Next country!</button>
+        </div>
       </section>
     </main>
     <script type="module" src="./js/script.js"></script>

@@ -17,6 +17,8 @@
   --clr-primary-700: var(--clr-primary);
   --clr-primary-800: color-mix(in srgb, var(--clr-primary) 85%, black);
   --clr-primary-900: color-mix(in srgb, var(--clr-primary) 60%, black);
+
+  --clr-success: #1f8d4a;
 }
 
 html * {
@@ -117,12 +119,10 @@ p {
   border-color: var(--clr-hover);
 }
 
-#hint-btn {
-  width: 2.25rem;
-}
-
-#hint {
-  height: 1rem;
+.solution {
+  pointer-events: none;
+  background-color: var(--clr-success);
+  border-color: var(--clr-success);
 }
 
 /* UTILITIES */
