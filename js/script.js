@@ -5,14 +5,22 @@ const nextRound = document.getElementById("next-round-btn");
 const flagElement = document.getElementById("flag");
 const restartButton = document.getElementById("next-round-btn");
 const countryChoices = document.getElementById("country-choices");
-restartButton.addEventListener("click", () => {
-  startNewRound();
-});
+const optionButtons = [...document.getElementsByClassName("option")];
 
 let score = 0;
 let randomCountry;
 let continentForCountry;
 let countryToGuessIndex;
+let countryOptions;
+
+optionButtons.forEach((btn, index) => {
+  btn.addEventListener("click", (event) => {
+    handleCountrySelection(event, countryOptions);
+  });
+});
+restartButton.addEventListener("click", () => {
+  startNewRound();
+});
 
 startGame();
 
@@ -48,12 +56,10 @@ function getCountryOptions() {
 }
 
 function revealSolution(solutionIndex) {
-  // getElements... returns a HTMLCollection so I turn it into an Array
-  const options = [...document.getElementsByClassName("option")];
-  const solutionButton = options[solutionIndex];
+  const solutionButton = optionButtons[solutionIndex];
 
-  // disable button interaction for options
-  options.forEach((opt) => {
+  // disable button interaction for optionButtons
+  optionButtons.forEach((opt) => {
     if (opt === solutionButton) return;
 
     opt.classList.add("disabled");
@@ -63,15 +69,16 @@ function revealSolution(solutionIndex) {
   solutionButton.classList.add("solution");
 
   flagElement.classList.remove("fade-in");
-  solutionButton.classList.add("correct");
   nextRound.hidden = false;
 }
 
 function startNewRound() {
+  optionButtons.forEach((btn) => {
+    btn.classList.remove("disabled", "solution");
+  });
   initializeRound();
 
   flagElement.classList.add("fade-in");
-  flagElement.textContent = randomCountry.flag;
   nextRound.hidden = true;
 }
 
@@ -88,34 +95,32 @@ function decreaseScore() {
 }
 
 function initializeRound() {
-  const options = getCountryOptions();
-  const optionButtons = [...document.getElementsByClassName("option")];
+  countryOptions = getCountryOptions();
   countryToGuessIndex = getRandomInt(3);
 
   optionButtons.forEach((btn, index) => {
-    const country = options[index];
+    const country = countryOptions[index];
     btn.textContent = country.name;
-    btn.addEventListener("click", (event) => {
-      handleCountrySelection(event, options);
-    });
   });
 
-  flagElement.textContent = options[countryToGuessIndex].flag;
+  flagElement.textContent = countryOptions[countryToGuessIndex].flag;
 }
 
-function handleCountrySelection(event, options) {
+function handleCountrySelection(event, countryOptions) {
   const selectedCountry = event.target.textContent;
 
-  if (selectedCountry === options[countryToGuessIndex].name) {
+  if (selectedCountry === countryOptions[countryToGuessIndex].name) {
+    console.log("correct");
+
     increaseScore();
     // highlight correct answer
 
     revealSolution(countryToGuessIndex);
   } else {
+    console.log("false");
     decreaseScore();
     // highlight correct answer
-    revealSolution();
+    revealSolution(countryToGuessIndex);
     // start reset score to 0
-    // show restart game button
   }
 }
