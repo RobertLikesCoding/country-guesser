@@ -8,10 +8,11 @@ const countryChoices = document.getElementById("country-choices");
 const optionButtons = [...document.getElementsByClassName("option")];
 
 let score = 0;
+let remainingCountries = { ...countriesList };
 let randomCountry;
-let continentForCountry;
+let currentContinent;
 let countryToGuessIndex;
-let countryOptions;
+let countryOptions = [];
 
 optionButtons.forEach((btn, index) => {
   btn.addEventListener("click", (event) => {
@@ -45,12 +46,21 @@ function getRandomInt(max) {
 
 function getCountryOptions() {
   const countries = [];
-  // NO DUPLICATES!
-  for (let step = 0; step < 3; step++) {
-    const continent = Object.keys(countriesList)[getRandomInt(5)];
+  while (countries.length < 3) {
+    currentContinent = Object.keys(remainingCountries)[getRandomInt(5)];
     const randomCountry =
-      countriesList[continent][getRandomInt(continent.length)];
-    countries.push(randomCountry);
+      remainingCountries[currentContinent][
+        getRandomInt(currentContinent.length)
+      ];
+
+    if (countries.includes(randomCountry)) {
+      return;
+    } else {
+      countries.push({
+        continent: currentContinent,
+        country: randomCountry,
+      });
+    }
   }
   return countries;
 }
@@ -95,21 +105,23 @@ function decreaseScore() {
 }
 
 function initializeRound() {
+  countryOptions[countryToGuessIndex] &&
+    updateRemainingCountries(countryOptions[countryToGuessIndex]);
   countryOptions = getCountryOptions();
   countryToGuessIndex = getRandomInt(3);
 
   optionButtons.forEach((btn, index) => {
-    const country = countryOptions[index];
+    const country = countryOptions[index].country;
     btn.textContent = country.name;
   });
 
-  flagElement.textContent = countryOptions[countryToGuessIndex].flag;
+  flagElement.textContent = countryOptions[countryToGuessIndex].country.flag;
 }
 
 function handleCountrySelection(event, countryOptions) {
   const selectedCountry = event.target.textContent;
 
-  if (selectedCountry === countryOptions[countryToGuessIndex].name) {
+  if (selectedCountry === countryOptions[countryToGuessIndex].country.name) {
     console.log("correct");
 
     increaseScore();
@@ -123,4 +135,16 @@ function handleCountrySelection(event, countryOptions) {
     revealSolution(countryToGuessIndex);
     // start reset score to 0
   }
+}
+
+function updateRemainingCountries(solution) {
+  console.log("before", remainingCountries, solution);
+  if (!countryOptions || !currentContinent) return;
+
+  const countryIndex = remainingCountries[solution.continent].findIndex(
+    (c) => c === solution.country,
+  );
+
+  remainingCountries[solution.continent].splice(countryIndex, 1);
+  console.log("after", remainingCountries);
 }
