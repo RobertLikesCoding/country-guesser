@@ -48,12 +48,13 @@ function getCountryOptions() {
   const countries = [];
   while (countries.length < 3) {
     currentContinent = Object.keys(remainingCountries)[getRandomInt(5)];
+
     const randomCountry =
       remainingCountries[currentContinent][
         getRandomInt(currentContinent.length)
       ];
 
-    if (countries.includes(randomCountry)) {
+    if (countries.some((c) => c.country === randomCountry)) {
       return;
     } else {
       countries.push({
@@ -101,6 +102,10 @@ function decreaseScore() {
   if (score == 0) return;
 
   score = score - 2;
+  if (score < 0) {
+    score = 0;
+  }
+
   scoreDisplay.textContent = score;
 }
 
