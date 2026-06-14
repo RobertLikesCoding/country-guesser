@@ -17,6 +17,8 @@
   --clr-primary-700: var(--clr-primary);
   --clr-primary-800: color-mix(in srgb, var(--clr-primary) 85%, black);
   --clr-primary-900: color-mix(in srgb, var(--clr-primary) 60%, black);
+
+  --clr-success: #1f8d4a;
 }
 
 html * {
@@ -82,17 +84,6 @@ p {
   height: 3rem;
 }
 
-#solution {
-  font-size: 1.25rem;
-  margin-top: 1rem;
-  min-height: 1.5rem;
-  display: block;
-}
-
-.solution-underline {
-  border-bottom: 2px dashed var(--clr-primary);
-}
-
 .fade-in {
   animation: fadeIn forwards 1s;
 }
@@ -128,13 +119,13 @@ p {
   border-color: var(--clr-hover);
 }
 
-#hint-btn {
-  width: 2.25rem;
+.solution {
+  pointer-events: none;
+  background-color: var(--clr-success);
+  border-color: var(--clr-success);
 }
 
-#hint {
-  height: 1rem;
-}
+/* UTILITIES */
 
 .disabled {
   opacity: 0.3;
@@ -153,4 +144,10 @@ p {
 
 .text-align-left {
   text-align: left;
+}
+
+#country-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
