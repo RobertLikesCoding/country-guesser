@@ -31,9 +31,14 @@ nextRoundButton.addEventListener("click", () => {
 });
 startButton.addEventListener("click", () => {
   endScreen.classList.add("hidden");
+  nextRound.hidden = true;
+  optionButtons.forEach((btn) => {
+    btn.classList.remove("disabled", "solution");
+  });
+
   startScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
-  scoreSection.classList.remove("hidden");
+  scoreSection.classList.replace("hidden", "flex-between");
   scoreDisplay.classList.add("fade-in");
   scoreDisplay.textContent = `Score: ${score}`;
   livesDisplay.classList.add("fade-in");
@@ -127,12 +132,8 @@ function decreaseLives() {
 function gameOver() {
   gameScreen.classList.add("hidden");
   endScreen.classList.remove("hidden");
-  scoreSection.classList.remove("flex-between");
-  scoreSection.classList.add("hidden");
+  scoreSection.classList.replace("flex-between", "hidden");
   endScreen.append(startButton);
-  optionButtons.forEach((btn) => {
-    btn.classList.remove("disabled", "solution");
-  });
 
   score = 0;
   lives = 3;
@@ -160,19 +161,14 @@ function handleCountrySelection(event, countryOptions) {
   const selectedCountry = event.target.textContent;
 
   if (selectedCountry === countryOptions[countryToGuessIndex].country.name) {
-    console.log("correct");
-
     increaseScore();
-    // highlight correct answer
 
     revealSolution(countryToGuessIndex);
   } else {
-    console.log("false");
     decreaseScore();
     decreaseLives();
     // highlight correct answer
     revealSolution(countryToGuessIndex);
-    // start reset score to 0
   }
 }
 
