@@ -12,9 +12,9 @@
   </head>
   <body>
     <main>
-      <section id="score-section" class="hidden">
-        <p>Score:</p>
+      <section id="score-section" class="hidden flex-between">
         <p id="score"></p>
+        <p id="lives"></p>
       </section>
 
       <section id="start-screen" class="game-area text-align-left">
@@ -44,6 +44,11 @@
         <div style="display: flex; gap: 0.5rem">
           <button id="next-round-btn" class="btn" hidden>Next country!</button>
         </div>
+      </section>
+
+      <section id="end-screen" class="game-area hidden">
+        <h1>Game Over</h1>
+        <p>Try again, you'll eventually become a flagxpert!</p>
       </section>
     </main>
     <script type="module" src="./js/script.js"></script>
