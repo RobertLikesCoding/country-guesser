@@ -50,17 +50,18 @@ function getRandomInt(max) {
 
 function getCountryOptions() {
   const countries = [];
+
   while (countries.length < 3) {
     const continents = Object.keys(remainingCountriesList);
     currentContinent = continents[getRandomInt(continents.length)];
 
     const randomCountry =
       remainingCountriesList[currentContinent][
-        getRandomInt(currentContinent.length)
+        getRandomInt(remainingCountriesList[currentContinent].length)
       ];
 
     if (countries.some((c) => c.country === randomCountry)) {
-      return;
+      continue;
     } else {
       countries.push({
         continent: currentContinent,
