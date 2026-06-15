@@ -1,3 +1,3 @@
-### Flag Guesser
+### Country Guesser
 
-I build this tiny website to practice recognizing flags.
+I built this tiny app to practice recognizing flags.
