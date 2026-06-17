@@ -1,0 +1,24 @@
+{
+  "name": "country-guesser",
+  "version": "1.0.0",
+  "description": "I build this tiny website to practice recognizing flags.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertLikesCoding/flag-guesser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RobertLikesCoding/country-guesser/issues"
+  },
+  "homepage": "https://github.com/RobertLikesCoding/country-guesser#readme",
+  "devDependencies": {
+    "vitest": "^4.1.9"
+  }
+}
