@@ -1,4 +1,5 @@
 import { countriesList } from "./countries.js";
+import { getRandomInt } from "./utils.js";
 
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
@@ -48,10 +49,6 @@ startButton.addEventListener("click", () => {
 });
 
 initializeRound();
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
-}
 
 function getCountryOptions() {
   const countries = [];
