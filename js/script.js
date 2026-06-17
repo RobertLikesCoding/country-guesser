@@ -1,5 +1,9 @@
 import { countriesList } from "./countries.js";
+import { useCountries } from "./gameFunctions.js";
 import { getRandomInt } from "./utils.js";
+
+const { getCountryOptions, updateRemainingCountries, resetRemainingCountries } =
+  useCountries();
 
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
@@ -16,7 +20,6 @@ const scoreSection = document.getElementById("score-section");
 
 let score = 0;
 let lives = 3;
-let remainingCountriesList = { ...countriesList };
 let randomCountry;
 let currentContinent;
 let countryToGuessIndex;
@@ -49,30 +52,6 @@ startButton.addEventListener("click", () => {
 });
 
 initializeRound();
-
-function getCountryOptions() {
-  const countries = [];
-
-  while (countries.length < 3) {
-    const continents = Object.keys(remainingCountriesList);
-    currentContinent = continents[getRandomInt(continents.length)];
-
-    const randomCountry =
-      remainingCountriesList[currentContinent][
-        getRandomInt(remainingCountriesList[currentContinent].length)
-      ];
-
-    if (countries.some((c) => c.country === randomCountry)) {
-      continue;
-    } else {
-      countries.push({
-        continent: currentContinent,
-        country: randomCountry,
-      });
-    }
-  }
-  return countries;
-}
 
 function revealSolution(solutionIndex) {
   const solutionButton = optionButtons[solutionIndex];
@@ -134,15 +113,14 @@ function gameOver() {
 
   score = 0;
   lives = 3;
-  remainingCountriesList = { ...countriesList };
+  resetRemainingCountries();
   countryOptions = [];
 }
 
 function initializeRound() {
   countryOptions[countryToGuessIndex] &&
-    updateRemainingCountries(countryOptions[countryToGuessIndex]);
+    updateRemainingCountries(countryOptions, countryToGuessIndex);
   countryOptions = getCountryOptions();
-  console.log("countryOptions", countryOptions);
 
   countryToGuessIndex = getRandomInt(3);
 
@@ -167,16 +145,4 @@ function handleCountrySelection(event, countryOptions) {
     // highlight correct answer
     revealSolution(countryToGuessIndex);
   }
-}
-
-function updateRemainingCountries(solution) {
-  console.log("before", remainingCountriesList, solution);
-  if (!countryOptions || !currentContinent) return;
-
-  const countryIndex = remainingCountriesList[solution.continent].findIndex(
-    (c) => c === solution.country,
-  );
-
-  remainingCountriesList[solution.continent].splice(countryIndex, 1);
-  console.log("after", remainingCountriesList);
 }
