@@ -30,22 +30,19 @@ export function useCountries() {
     return countries;
   }
 
-  function updateRemainingCountries(countryOptions, solutionIndex) {
-    if (!countryOptions || !currentContinent) return;
+  function updateRemainingCountries(solution) {
+    if (!currentContinent) return;
 
-    const solution = countryOptions[solutionIndex];
-    console.log("before", remainingCountriesList, solution);
-
-    const countryIndex = remainingCountriesList[solution.continent].findIndex(
-      (c) => c === solution.country,
+    const filteredCountries = remainingCountriesList[solution.continent].filter(
+      (c) => {
+        return c.name !== solution.country.name;
+      },
     );
-
-    remainingCountriesList[solution.continent].splice(countryIndex, 1);
-    console.log("after", remainingCountriesList);
+    remainingCountriesList[solution.continent] = filteredCountries;
   }
 
   function resetRemainingCountries() {
-    remainingCountriesList = { ...countriesList };
+    return (remainingCountriesList = { ...countriesList });
   }
 
   return {

@@ -1,10 +1,11 @@
-import { test, expect, describe } from "vitest";
+import { it, expect, describe } from "vitest";
 import { getRandomInt } from "../js/utils";
 
 describe("getRandomInt", () => {
-  test("returns a random number", () => {
+  it("returns a random number", () => {
     const randNumber = getRandomInt(10);
 
-    expect(typeof randNumber === "number").toBe(true);
+    expect(randNumber <= 10).toBe(true);
+    expect(randNumber > 0).toBe(true);
   });
 });

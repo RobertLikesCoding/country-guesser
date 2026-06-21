@@ -118,8 +118,8 @@ function gameOver() {
 }
 
 function initializeRound() {
-  countryOptions[countryToGuessIndex] &&
-    updateRemainingCountries(countryOptions, countryToGuessIndex);
+  const solution = countryOptions[countryToGuessIndex];
+  solution && updateRemainingCountries(solution);
   countryOptions = getCountryOptions();
 
   countryToGuessIndex = getRandomInt(3);
