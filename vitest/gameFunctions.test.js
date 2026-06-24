@@ -42,4 +42,41 @@ describe("useCountries", () => {
       );
     });
   });
+
+  describe("resetRemainingCountries", () => {
+    let countries;
+    beforeEach(() => {
+      countries = useCountries();
+    });
+
+    it("resets the remainingCountries to the full list", () => {
+      expect(countries.resetRemainingCountries()).toEqual(countriesList);
+    });
+  });
+
+  describe("getCountryOptions", () => {
+    let countries;
+    beforeEach(() => {
+      countries = useCountries();
+    });
+
+    it("returns an object with three countries", () => {
+      const options = countries.getCountryOptions();
+
+      expect(options.length).toBe(3);
+      expect(options[0]).toMatchObject({
+        continent: expect.any(String),
+        country: {
+          name: expect.any(String),
+          flag: expect.any(String),
+        },
+      });
+    });
+    it("returns no duplicate options", () => {
+      const options = countries.getCountryOptions();
+
+      const countryNames = options.map((c) => c.country.name);
+      expect(countryNames.length).toEqual(new Set(countryNames).size);
+    });
+  });
 });

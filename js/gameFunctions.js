@@ -18,7 +18,7 @@ export function useCountries() {
           getRandomInt(remainingCountriesList[currentContinent].length)
         ];
 
-      if (countries.some((c) => c.country === randomCountry)) {
+      if (countries.some((c) => c.country.name === randomCountry.name)) {
         continue;
       } else {
         countries.push({
