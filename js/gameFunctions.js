@@ -1,7 +1,7 @@
 import { countriesList } from "./countries.js";
 import { getRandomInt } from "./utils.js";
 
-export function useCountries() {
+export function useCountries(list = countriesList) {
   let remainingCountriesList;
   let currentContinent;
   resetRemainingCountries();
@@ -38,11 +38,16 @@ export function useCountries() {
         return c.name !== solution.country.name;
       },
     );
+
     remainingCountriesList[solution.continent] = filteredCountries;
+    if (remainingCountriesList[solution.continent].length === 0) {
+      // remove empty continents
+      delete remainingCountriesList[solution.continent];
+    }
   }
 
   function resetRemainingCountries() {
-    return (remainingCountriesList = { ...countriesList });
+    return (remainingCountriesList = { ...list });
   }
 
   return {

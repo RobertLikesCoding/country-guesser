@@ -7,7 +7,6 @@ const { getCountryOptions, updateRemainingCountries, resetRemainingCountries } =
 
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
-const nextRound = document.getElementById("next-round-btn");
 const flagElement = document.getElementById("flag");
 const startButton = document.getElementById("start-btn");
 const nextRoundButton = document.getElementById("next-round-btn");

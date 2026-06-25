@@ -30,6 +30,25 @@ describe("useCountries", () => {
         remainingCountriesList[solution.continent].length,
       );
     });
+
+    it("removes a continent with no countries in it", () => {
+      const minimalList = {
+        europe: [{ name: "Germany", flag: "🇩🇪" }],
+        america: [
+          { name: "Canada", flag: "🇨🇦" },
+          { name: "Mexico", flag: "🇲🇽" },
+        ],
+      };
+
+      const countries = useCountries(minimalList);
+      remainingCountriesList = countries.resetRemainingCountries();
+      countries.getCountryOptions();
+      countries.updateRemainingCountries(solution);
+
+      expect(Object.keys(remainingCountriesList).length).toBe(1);
+      expect(Object.keys(remainingCountriesList)).not.toContain("europe");
+    });
+
     it("does nothing if no current continent exists", () => {
       const originalLength = remainingCountriesList[solution.continent].length;
       countries.updateRemainingCountries(solution);
@@ -72,6 +91,7 @@ describe("useCountries", () => {
         },
       });
     });
+
     it("returns no duplicate options", () => {
       const options = countries.getCountryOptions();
 
