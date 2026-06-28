@@ -54,8 +54,6 @@ startButton.addEventListener("click", () => {
   initializeRound();
 });
 
-// initializeRound();
-
 function revealSolution(solutionIndex) {
   const solutionButton = optionButtons[solutionIndex];
 
@@ -121,6 +119,9 @@ function gameOver() {
 }
 
 function initializeRound() {
+  // if (gameOver()) {
+  //   return
+  // }
   const solution = countryOptions[countryToGuessIndex];
   solution && updateRemainingCountries(solution);
   countryOptions = getCountryOptions();

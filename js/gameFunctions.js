@@ -2,7 +2,7 @@ import { countriesList } from "./countries.js";
 import { countriesFixture } from "./countriesCopy.js";
 import { getRandomInt } from "./utils.js";
 
-export function useCountries(list = countriesList) {
+export function useCountries(list = countriesFixture) {
   let remainingCountriesList;
   let currentContinent;
   let currentOptions = [];
@@ -18,7 +18,7 @@ export function useCountries(list = countriesList) {
     while (currentOptions.length < 3) {
       addToOptions(countriesList);
     }
-    return currentOptions;
+    return shuffle(currentOptions);
   }
 
   function updateRemainingCountries(solution) {
@@ -68,6 +68,15 @@ export function useCountries(list = countriesList) {
         country: randomCountry,
       });
     }
+  }
+
+  // credits: https://www.geeksforgeeks.org/javascript/how-to-shuffle-the-elements-of-an-array-in-javascript/
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
   }
 
   return {
