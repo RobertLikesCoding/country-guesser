@@ -2,12 +2,15 @@ import { countriesList } from "./countries.js";
 import { useCountries } from "./gameFunctions.js";
 import { getRandomInt } from "./utils.js";
 
-const { getCountryOptions, updateRemainingCountries, resetRemainingCountries } =
-  useCountries();
+const {
+  getCountryOptions,
+  updateRemainingCountries,
+  resetRemainingCountries,
+  setSolutionIndex,
+} = useCountries();
 
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
-const nextRound = document.getElementById("next-round-btn");
 const flagElement = document.getElementById("flag");
 const startButton = document.getElementById("start-btn");
 const nextRoundButton = document.getElementById("next-round-btn");
@@ -35,7 +38,7 @@ nextRoundButton.addEventListener("click", () => {
 });
 startButton.addEventListener("click", () => {
   endScreen.classList.add("hidden");
-  nextRound.hidden = true;
+  nextRoundButton.hidden = true;
   optionButtons.forEach((btn) => {
     btn.classList.remove("disabled", "solution");
   });
@@ -51,8 +54,6 @@ startButton.addEventListener("click", () => {
   initializeRound();
 });
 
-initializeRound();
-
 function revealSolution(solutionIndex) {
   const solutionButton = optionButtons[solutionIndex];
 
@@ -67,7 +68,7 @@ function revealSolution(solutionIndex) {
   solutionButton.classList.add("solution");
 
   flagElement.classList.remove("fade-in");
-  nextRound.hidden = false;
+  nextRoundButton.hidden = false;
 }
 
 function startNextRound() {
@@ -77,7 +78,7 @@ function startNextRound() {
   initializeRound();
 
   flagElement.classList.add("fade-in");
-  nextRound.hidden = true;
+  nextRoundButton.hidden = true;
 }
 
 function increaseScore() {
@@ -106,6 +107,20 @@ function decreaseLives() {
 }
 
 function gameOver() {
+  const heading = endScreen.querySelector("h1");
+  const text = endScreen.querySelector("p");
+  const finalScore = score;
+  const finalScoreDisplay = endScreen.querySelector("h2");
+
+  if (lives > 0) {
+    heading.textContent = "Congratulations";
+    text.textContent = `You have completed the game`;
+  } else {
+    heading.textContent = "Game Over";
+    text.textContent = "Try again and you'll eventually become a flagxpert!";
+  }
+  finalScoreDisplay.textContent = `Final score: ${finalScore}`;
+
   gameScreen.classList.add("hidden");
   endScreen.classList.remove("hidden");
   scoreSection.classList.replace("flex-between", "hidden");
@@ -121,8 +136,11 @@ function initializeRound() {
   const solution = countryOptions[countryToGuessIndex];
   solution && updateRemainingCountries(solution);
   countryOptions = getCountryOptions();
+  if (countryOptions.length === 0) {
+    return gameOver();
+  }
 
-  countryToGuessIndex = getRandomInt(3);
+  countryToGuessIndex = setSolutionIndex();
 
   optionButtons.forEach((btn, index) => {
     const country = countryOptions[index].country;
@@ -137,12 +155,9 @@ function handleCountrySelection(event, countryOptions) {
 
   if (selectedCountry === countryOptions[countryToGuessIndex].country.name) {
     increaseScore();
-
-    revealSolution(countryToGuessIndex);
   } else {
     decreaseScore();
     decreaseLives();
-    // highlight correct answer
-    revealSolution(countryToGuessIndex);
   }
+  revealSolution(countryToGuessIndex);
 }
