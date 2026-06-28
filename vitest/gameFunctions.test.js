@@ -98,5 +98,16 @@ describe("useCountries", () => {
       const countryNames = options.map((c) => c.country.name);
       expect(countryNames.length).toEqual(new Set(countryNames).size);
     });
+
+    describe("when no countries remain", () => {
+      beforeEach(() => {
+        countries = useCountries({});
+      });
+      it("returns empty array", () => {
+        const options = countries.getCountryOptions();
+
+        expect(options).toEqual([]);
+      });
+    });
   });
 });

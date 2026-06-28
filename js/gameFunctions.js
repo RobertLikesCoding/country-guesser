@@ -1,14 +1,17 @@
 import { countriesList } from "./countries.js";
-import { countriesFixture } from "./countriesCopy.js";
 import { getRandomInt } from "./utils.js";
 
-export function useCountries(list = countriesFixture) {
+export function useCountries(list = countriesList) {
   let remainingCountriesList;
   let currentContinent;
   let currentOptions = [];
   resetRemainingCountries();
 
   function getCountryOptions() {
+    if (Object.keys(remainingCountriesList).length === 0) {
+      return [];
+    }
+
     currentOptions = [];
     const continents = Object.keys(remainingCountriesList);
     // add country from remaining countries

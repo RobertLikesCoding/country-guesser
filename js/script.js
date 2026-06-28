@@ -107,6 +107,20 @@ function decreaseLives() {
 }
 
 function gameOver() {
+  const heading = endScreen.querySelector("h1");
+  const text = endScreen.querySelector("p");
+  const finalScore = score;
+  const finalScoreDisplay = endScreen.querySelector("h2");
+
+  if (lives > 0) {
+    heading.textContent = "Congratulations";
+    text.textContent = `You have completed the game`;
+  } else {
+    heading.textContent = "Game Over";
+    text.textContent = "Try again and you'll eventually become a flagxpert!";
+  }
+  finalScoreDisplay.textContent = `Final score: ${finalScore}`;
+
   gameScreen.classList.add("hidden");
   endScreen.classList.remove("hidden");
   scoreSection.classList.replace("flex-between", "hidden");
@@ -119,12 +133,12 @@ function gameOver() {
 }
 
 function initializeRound() {
-  // if (gameOver()) {
-  //   return
-  // }
   const solution = countryOptions[countryToGuessIndex];
   solution && updateRemainingCountries(solution);
   countryOptions = getCountryOptions();
+  if (countryOptions.length === 0) {
+    return gameOver();
+  }
 
   countryToGuessIndex = setSolutionIndex();
 
@@ -141,12 +155,9 @@ function handleCountrySelection(event, countryOptions) {
 
   if (selectedCountry === countryOptions[countryToGuessIndex].country.name) {
     increaseScore();
-
-    revealSolution(countryToGuessIndex);
   } else {
     decreaseScore();
     decreaseLives();
-    // highlight correct answer
-    revealSolution(countryToGuessIndex);
   }
+  revealSolution(countryToGuessIndex);
 }
