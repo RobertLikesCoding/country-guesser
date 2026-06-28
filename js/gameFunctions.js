@@ -1,33 +1,24 @@
 import { countriesList } from "./countries.js";
+import { countriesFixture } from "./countriesCopy.js";
 import { getRandomInt } from "./utils.js";
 
 export function useCountries(list = countriesList) {
   let remainingCountriesList;
   let currentContinent;
+  let currentOptions = [];
   resetRemainingCountries();
 
   function getCountryOptions() {
-    const countries = [];
+    currentOptions = [];
+    const continents = Object.keys(remainingCountriesList);
+    // add country from remaining countries
+    addToOptions(remainingCountriesList);
 
-    while (countries.length < 3) {
-      const continents = Object.keys(remainingCountriesList);
-      currentContinent = continents[getRandomInt(continents.length)];
-
-      const randomCountry =
-        remainingCountriesList[currentContinent][
-          getRandomInt(remainingCountriesList[currentContinent].length)
-        ];
-
-      if (countries.some((c) => c.country.name === randomCountry.name)) {
-        continue;
-      } else {
-        countries.push({
-          continent: currentContinent,
-          country: randomCountry,
-        });
-      }
+    // other countries are added from the complete list
+    while (currentOptions.length < 3) {
+      addToOptions(countriesList);
     }
-    return countries;
+    return currentOptions;
   }
 
   function updateRemainingCountries(solution) {
@@ -46,13 +37,43 @@ export function useCountries(list = countriesList) {
     }
   }
 
+  function setSolutionIndex() {
+    const resolvedRemainingCountries = Object.values(remainingCountriesList)
+      .flat()
+      .map((c) => c.name);
+
+    return currentOptions.findIndex((c) => {
+      return resolvedRemainingCountries.includes(c.country.name);
+    });
+  }
+
   function resetRemainingCountries() {
     return (remainingCountriesList = { ...list });
+  }
+
+  function addToOptions(countriesList) {
+    const continents = Object.keys(countriesList);
+    currentContinent = continents[getRandomInt(continents.length)];
+
+    const randomCountry =
+      countriesList[currentContinent][
+        getRandomInt(countriesList[currentContinent].length)
+      ];
+
+    if (currentOptions.some((c) => c.country.name === randomCountry.name)) {
+      return;
+    } else {
+      currentOptions.push({
+        continent: currentContinent,
+        country: randomCountry,
+      });
+    }
   }
 
   return {
     getCountryOptions,
     updateRemainingCountries,
     resetRemainingCountries,
+    setSolutionIndex,
   };
 }

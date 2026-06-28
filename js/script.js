@@ -2,8 +2,12 @@ import { countriesList } from "./countries.js";
 import { useCountries } from "./gameFunctions.js";
 import { getRandomInt } from "./utils.js";
 
-const { getCountryOptions, updateRemainingCountries, resetRemainingCountries } =
-  useCountries();
+const {
+  getCountryOptions,
+  updateRemainingCountries,
+  resetRemainingCountries,
+  setSolutionIndex,
+} = useCountries();
 
 const scoreDisplay = document.getElementById("score");
 const livesDisplay = document.getElementById("lives");
@@ -34,7 +38,7 @@ nextRoundButton.addEventListener("click", () => {
 });
 startButton.addEventListener("click", () => {
   endScreen.classList.add("hidden");
-  nextRound.hidden = true;
+  nextRoundButton.hidden = true;
   optionButtons.forEach((btn) => {
     btn.classList.remove("disabled", "solution");
   });
@@ -50,7 +54,7 @@ startButton.addEventListener("click", () => {
   initializeRound();
 });
 
-initializeRound();
+// initializeRound();
 
 function revealSolution(solutionIndex) {
   const solutionButton = optionButtons[solutionIndex];
@@ -66,7 +70,7 @@ function revealSolution(solutionIndex) {
   solutionButton.classList.add("solution");
 
   flagElement.classList.remove("fade-in");
-  nextRound.hidden = false;
+  nextRoundButton.hidden = false;
 }
 
 function startNextRound() {
@@ -76,7 +80,7 @@ function startNextRound() {
   initializeRound();
 
   flagElement.classList.add("fade-in");
-  nextRound.hidden = true;
+  nextRoundButton.hidden = true;
 }
 
 function increaseScore() {
@@ -121,7 +125,7 @@ function initializeRound() {
   solution && updateRemainingCountries(solution);
   countryOptions = getCountryOptions();
 
-  countryToGuessIndex = getRandomInt(3);
+  countryToGuessIndex = setSolutionIndex();
 
   optionButtons.forEach((btn, index) => {
     const country = countryOptions[index].country;
