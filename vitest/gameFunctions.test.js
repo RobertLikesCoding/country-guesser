@@ -110,4 +110,19 @@ describe("useCountries", () => {
       });
     });
   });
+
+  describe("setSolutionIndex", () => {
+    it("returns the index of the selected solution after shuffling", () => {
+      const countries = useCountries();
+      countries.resetRemainingCountries();
+
+      const options = countries.getCountryOptions();
+      const solutionIndex = countries.setSolutionIndex(options);
+      const shuffledOptions = [...options];
+      const [solutionOption] = shuffledOptions.splice(solutionIndex, 1);
+      shuffledOptions.push(solutionOption);
+
+      expect(countries.setSolutionIndex(shuffledOptions)).toBe(2);
+    });
+  });
 });

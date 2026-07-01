@@ -133,14 +133,16 @@ function gameOver() {
 }
 
 function initializeRound() {
+  // updateRemainingCountries before starting the next round
   const solution = countryOptions[countryToGuessIndex];
   solution && updateRemainingCountries(solution);
+
   countryOptions = getCountryOptions();
   if (countryOptions.length === 0) {
     return gameOver();
   }
 
-  countryToGuessIndex = setSolutionIndex();
+  countryToGuessIndex = setSolutionIndex(countryOptions);
 
   optionButtons.forEach((btn, index) => {
     const country = countryOptions[index].country;
